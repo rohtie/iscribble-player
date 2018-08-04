@@ -42,7 +42,7 @@
                 <br><br><br>
                 Convert gallery links to replay downloads.<br>
                 Put each link on separate lines. Then press convert.<br>
-                Click on the links and copy paste the url with .isz ending into your browser.
+                (not this only works on firefox ATM)
                 <div class="convert-wrapper">
                     <textarea class="convert-left"></textarea>
                     <div class="convert-right"></div>
@@ -64,22 +64,18 @@
         lines.forEach(function (line) {
             var matches = line.match(/.*drawing(\d+)\-(.+)\.html/);
 
-            var link = document.createElement('a');
-            link.innerHTML = matches[2];
-            link.setAttribute('href', "http://www.iscribble.net/gallery/meta.php?id=" + matches[1]);
-            link.setAttribute('target', "_blank");
+            $.getJSON('http://cybrill.prophp.org/iscribble.php?id=' + matches[1], function(response){
+                var url = response.split(/\n/)[0];
 
-            resultContainer.appendChild(link);
+                var link = document.createElement('a');
+                link.innerHTML = matches[2];
+                link.setAttribute('href', url);
+                link.setAttribute('target', "_blank");
 
-            // $.ajax('http://www.iscribble.net/gallery/meta.php?id=' + matches[1]).done(function (data) {
+                resultContainer.appendChild(link);
+            });
 
-            // });
-
-
-            // http://www.iscribble.net/gallery/data/201807/
         });
-
-
       });
     </script>
 
