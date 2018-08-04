@@ -42,7 +42,7 @@
                 <br><br><br>
                 Convert gallery links to replay downloads.<br>
                 Put each link on separate lines. Then press convert.<br>
-                (not this only works on firefox ATM)
+                Note: Only works with firefox ATM.
                 <div class="convert-wrapper">
                     <textarea class="convert-left"></textarea>
                     <div class="convert-right"></div>
@@ -64,7 +64,7 @@
         lines.forEach(function (line) {
             var matches = line.match(/.*drawing(\d+)\-(.+)\.html/);
 
-            $.getJSON('http://cybrill.prophp.org/iscribble.php?id=' + matches[1], function(response){
+            $.getJSON('http://cybrill.prophp.org/iscribble.php?id=' + matches[1] + '&callback=?', function(response){
                 var url = response.split(/\n/)[0];
 
                 var link = document.createElement('a');
