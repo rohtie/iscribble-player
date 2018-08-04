@@ -193,7 +193,7 @@
     .rating-container, .rating-container:before , .rating-container-rtl .rating-stars, .rating-container-rtl .rating-stars:before {
         color: #f3f3f3!important;
     }
-    
+
     .star-rating .clear-rating, .star-rating-rtl .clear-rating {
         display: none;
     }
@@ -6494,6 +6494,18 @@ body {
 .fa-btn {
   margin-right: 6px; }
 
-/*# sourceMappingURL=app.css.map */
 
-/*# sourceMappingURL=app.css.map */
+.convert-left,
+.convert-right {
+  width: 50%;
+  min-height: 150px;
+}
+
+.convert-right {
+  float: right;
+}
+
+.convert-right a {
+  display: block;
+  padding-left: 20px;
+}

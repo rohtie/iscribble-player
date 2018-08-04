@@ -39,12 +39,48 @@
                 Upload your .isz file:
                 <input id="upload" type=file   accept=".isz" name="files[]" size=30>
                 </form>
+                <br><br><br>
+                Convert gallery links to replay downloads.<br>
+                Put each link on separate lines. Then press convert.<br>
+                Click on the links and copy paste the url with .isz ending into your browser.
+                <div class="convert-wrapper">
+                    <textarea class="convert-left"></textarea>
+                    <div class="convert-right"></div>
+                </div>
+                <button id="convert">convert</button>
             </article>
         </div>
     </div>
 
+
     <script type="text/javascript">
       document.getElementById('upload').addEventListener('change', handleUpload, false);
+
+      document.querySelector('#convert').addEventListener('click', function() {
+        var textarea = document.querySelector('.convert-left');
+        var lines = textarea.value.split('\n');
+
+        var resultContainer = document.querySelector('.convert-right');
+        lines.forEach(function (line) {
+            var matches = line.match(/.*drawing(\d+)\-(.+)\.html/);
+
+            var link = document.createElement('a');
+            link.innerHTML = matches[2];
+            link.setAttribute('href', "http://www.iscribble.net/gallery/meta.php?id=" + matches[1]);
+            link.setAttribute('target', "_blank");
+
+            resultContainer.appendChild(link);
+
+            // $.ajax('http://www.iscribble.net/gallery/meta.php?id=' + matches[1]).done(function (data) {
+
+            // });
+
+
+            // http://www.iscribble.net/gallery/data/201807/
+        });
+
+
+      });
     </script>
 
 </body></html>
