@@ -64,7 +64,7 @@
         lines.forEach(function (line) {
             var matches = line.match(/.*drawing(\d+)\-(.+)\.html/);
 
-            $.getJSON('http://cybrill.prophp.org/iscribble.php?id=' + matches[1] + '&callback=?', function(response){
+            $.getJSON('//cybrill.prophp.org/iscribble.php?id=' + matches[1] + '&callback=?', function(response){
                 var url = response.split(/\n/)[0];
 
                 var link = document.createElement('a');
