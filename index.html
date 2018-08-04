@@ -16,6 +16,7 @@
         <div class="box">
             <article class="inner-box">
                 <div class="row">
+                    <h1>Iscribble player</h1>
                     <div id="image-box">
                         <div id="image-container">
                             <div id="canvas" onclick="onClickPlayer();">
@@ -39,10 +40,12 @@
                 Upload your .isz file:
                 <input id="upload" type=file   accept=".isz" name="files[]" size=30>
                 </form>
-                <br><br><br>
+                <br><br>
                 Convert gallery links to replay downloads.<br>
-                Put each link on separate lines. Then press convert.<br>
-                Note: Only works with firefox ATM.
+                Put each link on separate lines. Then press convert.<br><br>
+                Note: Direct links only work with firefox ATM. If you use a different browser you will have to copy paste the url that looks like "http://www.iscribble.net/gallery/data/201102/543279.isz" into your browser.
+                <br>
+                <br>
                 <div class="convert-wrapper">
                     <textarea class="convert-left"></textarea>
                     <div class="convert-right"></div>
@@ -64,16 +67,29 @@
         lines.forEach(function (line) {
             var matches = line.match(/.*drawing(\d+)\-(.+)\.html/);
 
+            var success = false;
+
             $.getJSON('//cybrill.prophp.org/iscribble.php?id=' + matches[1] + '&callback=?', function(response){
                 var url = response.split(/\n/)[0];
 
                 var link = document.createElement('a');
-                link.innerHTML = matches[2];
+                link.innerHTML = matches[2] + " (direct download)";
                 link.setAttribute('href', url);
                 link.setAttribute('target', "_blank");
 
                 resultContainer.appendChild(link);
+
+                success = true;
             });
+
+            if (!success) {
+                var link = document.createElement('a');
+                link.innerHTML = matches[2] + " (alternative)";
+                link.setAttribute('href', "http://www.iscribble.net/gallery/meta.php?id=" + matches[1]);
+                link.setAttribute('target', "_blank");
+
+                resultContainer.appendChild(link);
+            }
 
         });
       });
